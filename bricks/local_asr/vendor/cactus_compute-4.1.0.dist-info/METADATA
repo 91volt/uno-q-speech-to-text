@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: cactus-compute
+Version: 4.1.0
+Summary: 30mb voice, vision and agentic AI for consumer devices.
+License: Apache-2.0
+Project-URL: Homepage, https://cactuscompute.com
+Project-URL: Repository, https://github.com/cactus-compute/cactus
+Project-URL: Bug Tracker, https://github.com/cactus-compute/cactus/issues
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: huggingface_hub
+Requires-Dist: Pillow>=10
+Provides-Extra: vision
+Provides-Extra: train
+Requires-Dist: numpy; extra == "train"
+Requires-Dist: jax; extra == "train"
+Requires-Dist: jaxlib; extra == "train"
+Requires-Dist: flax>=0.10.2; extra == "train"
+Requires-Dist: optax; extra == "train"
+Requires-Dist: safetensors; extra == "train"
+Requires-Dist: sentencepiece; extra == "train"
+Requires-Dist: whisper-normalizer; extra == "train"
+Requires-Dist: soxr; extra == "train"
+Provides-Extra: gpu
+Requires-Dist: jax[cuda12]; extra == "gpu"
+Provides-Extra: metal
+Requires-Dist: jax==0.4.38; extra == "metal"
+Requires-Dist: jaxlib==0.4.38; extra == "metal"
+Requires-Dist: jax-metal; extra == "metal"
+Provides-Extra: mic
+Requires-Dist: numpy; extra == "mic"
+Requires-Dist: soxr; extra == "mic"
+Requires-Dist: sounddevice; extra == "mic"
+Provides-Extra: compare
+Requires-Dist: openai-whisper; extra == "compare"
+Requires-Dist: moonshine-voice; extra == "compare"
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pydantic; extra == "test"
+Provides-Extra: mlx
+Requires-Dist: mlx[cpu]; extra == "mlx"
+Dynamic: license-file
+
+![Cactus Compute - Sub-50mb Super Intelligence For Consumer Devices](assets/banner.svg)
+
+Run text, speech and vision models locally with one Python package. Cactus provides tool calling, structured extraction, transcription, image understanding and model fine-tuning.
+
+## Install
+
+```sh
+pip install -U cactus-compute
+```
+
+Python 3.9 or later. The package downloads and caches the engine and requested model weights on first use. Inference runs locally and does not require JAX.
+
+## Agents
+
+[Needle 3](https://cactuscompute.com/needle) calls tools, extracts structured data and embeds text.
+
+```python
+import cactus
+
+@cactus.tool
+def get_weather(city: str):
+    "Get the current weather for a city."
+    return {"city": city, "temp_c": 27, "sky": "clear"}
+
+with cactus.Cactus(tools=[get_weather]) as agent:
+    print(agent.run("What's the weather in Lagos?")["results"])
+```
+
+`run()` executes your functions and returns their results. Use `complete()` when you want to inspect the proposed calls before executing them.
+
+## Voice
+
+[Whistle](https://cactuscompute.com/blog/whistle) transcribes speech in seven languages, with word timestamps and speech embeddings.
+
+```python
+import cactus
+
+print(cactus.transcribe("clip.wav")["text"])
+```
+
+Use a 16 kHz WAV file. Install `cactus-compute[mic]` for other sample rates or microphone capture.
+
+## Vision
+
+[Mirage](https://huggingface.co/Cactus-Compute/mirage) describes images and extracts structured data.
+
+```python
+import cactus
+
+print(cactus.Mirage().describe("photo.png"))
+```
+
+## Documentation
+
+- [Python API and CLI](https://cactuscompute.com/blog/needle-python-docs)
+- [Runtime binaries and supported platforms](https://huggingface.co/Cactus-Compute/cactus)
+- [Fine-tune Needle](https://cactuscompute.com/blog/finetuning-needle) or [Whistle](https://cactuscompute.com/blog/finetuning-whistle) with `cactus-compute[train]`
+- [Reference for coding assistants](llms.txt)
+
+Migrating from `cactus-needle`? Use `import cactus` and the `cactus` command. Needle 2 remains on the [legacy branch](https://github.com/cactus-compute/cactus/tree/legacy) with `cactus-compute<4`. The earlier general inference SDK is now [cactus-engine](https://pypi.org/project/cactus-engine/).
+
+Anonymous Python usage counts can be disabled with `CACTUS_TELEMETRY=0`. See [LICENSE](LICENSE) for the Apache 2.0 license.

@@ -1,0 +1,19 @@
+# App Lab cache
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+
+# Build output
+*.zip
+
+# macOS
+.DS_Store
+
+# Speech model, downloaded separately (see bricks/local_asr/service/models/README.md)
+bricks/local_asr/service/models/*.cact
+*.part
+
+# Packaging output
+dist/

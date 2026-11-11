@@ -1,0 +1,22 @@
+services:
+  local_asr:
+    image: ghcr.io/arduino/app-bricks/python-apps-base:0.10.1
+    entrypoint: ["python", "/brick/service/main.py"]
+    command: []
+    working_dir: /brick/service
+    environment:
+      CACTUS_TELEMETRY: "0"
+      HF_HUB_OFFLINE: "1"
+      ASR_THREADS: "4"
+    volumes:
+      - ${APP_HOME}/bricks/local_asr:/brick:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/api/health', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

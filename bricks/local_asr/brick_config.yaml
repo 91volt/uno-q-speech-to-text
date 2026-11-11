@@ -1,0 +1,3 @@
+id: local_asr
+name: Local ASR
+description: Offline English speech recognition with Cactus Whistle. Batch and streaming APIs, bundled ARM64 model and runtime.

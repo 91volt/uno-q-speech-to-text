@@ -1,0 +1,7 @@
+name: local-speech-to-text
+description: Offline English speech to text using the Local ASR custom brick.
+ports:
+- 7000
+bricks:
+- local_asr: {}
+icon: 🎙️
