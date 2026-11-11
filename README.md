@@ -29,9 +29,10 @@ projects, workshops, and hackathons.
 - A computer with a microphone and a recent browser (Chrome recommended)
 - A USB cable, or the board and computer on the same network
 
-The first run downloads Arduino's Python base image
-(`ghcr.io/arduino/app-bricks/python-apps-base:0.10.1`) if it is not already on
-the board. After that, everything works offline.
+The speech brick runs on Arduino's Python base image
+(`ghcr.io/arduino/app-bricks/python-apps-base:0.13.1`). Boards with Arduino App
+CLI 0.14 already have it. On older boards the first run downloads it, which
+needs Internet access. After that, everything works offline.
 
 ## Get the speech model
 

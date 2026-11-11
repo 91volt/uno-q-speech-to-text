@@ -3,7 +3,7 @@
 Cactus Whistle 4.1.0 on the UNO Q CPU. The ARM64 runtime and Python packages
 are included. The model is downloaded separately into `service/models/`; see
 `service/models/README.md`. No API keys or inference network access are required.
-The sidecar uses Arduino's Python apps base image 0.10.1; Docker downloads it only
+The sidecar uses Arduino's Python apps base image 0.13.1; Docker downloads it only
 if missing. No extracted virtual-environment executable is used.
 
 Import from Python with `from local_asr import LocalASR` and instantiate once.

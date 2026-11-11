@@ -1,6 +1,6 @@
 services:
   local_asr:
-    image: ghcr.io/arduino/app-bricks/python-apps-base:0.10.1
+    image: ghcr.io/arduino/app-bricks/python-apps-base:0.13.1
     entrypoint: ["python", "/brick/service/main.py"]
     command: []
     working_dir: /brick/service
